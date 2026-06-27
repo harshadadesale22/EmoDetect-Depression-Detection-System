@@ -1,49 +1,53 @@
 # 🧠 EmoDetect: Depression Detection System
 
-An AI-powered web application that detects signs of depression from textual input using **DistilBERT** and provides **Explainable AI (SHAP)** visualizations for transparent predictions.
+An AI-powered **Natural Language Processing (NLP)** web application that detects signs of depression from user-entered text using **DistilBERT** and provides **SHAP (SHapley Additive Explanations)** visualizations for transparent and explainable predictions.
 
 ---
 
 # 📖 Overview
 
-EmoDetect is a Natural Language Processing (NLP) based web application developed to identify depressive patterns in user-entered text. The system uses a fine-tuned **DistilBERT** model to classify text as **Depressed** or **Not Depressed** while providing confidence scores and SHAP-based explanations to improve prediction transparency.
+EmoDetect is an AI-powered depression detection system developed using **DistilBERT**, **Flask**, and **HTML/CSS/JavaScript**. The application analyzes textual input to classify it as **Depressed** or **Not Depressed**, along with a confidence score and SHAP-based explainability graph that highlights the words influencing the prediction.
 
 ---
 
 # ✨ Features
 
 * 🧠 Depression Detection using DistilBERT
-* 📊 SHAP Explainability
+* 📊 SHAP Explainability Graph
 * 📈 Confidence Score
 * ⚡ Real-time Prediction
-* 🌐 React-based User Interface
+* 🌐 User-friendly Web Interface
 * 🔥 Flask REST API Backend
-* 📱 Responsive Web Application
+* 📱 Responsive Design
 
 ---
 
-## 🛠 Tech Stack
+# 🛠️ Tech Stack
 
-### Frontend
-- HTML5
-- CSS3
-- JavaScript
+## Frontend
 
-### Backend
-- Python
-- Flask
-- Flask-CORS
+* HTML5
+* CSS3
+* JavaScript
 
-### Machine Learning
-- DistilBERT
-- Hugging Face Transformers
-- SHAP
-- NumPy
-- Scikit-learn
-- Matplotlib
+## Backend
+
+* Python
+* Flask
+* Flask-CORS
+
+## Machine Learning
+
+* DistilBERT
+* Hugging Face Transformers
+* SHAP
+* NumPy
+* Scikit-learn
+* Matplotlib
+
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```text
 EmoDetect-Depression-Detection-System
@@ -58,10 +62,35 @@ EmoDetect-Depression-Detection-System
 │   ├── script.js
 │   └── style.css
 │
+├── screenshots
+│   ├── home-page.png
+│   ├── depression-prediction.png
+│   └── not-depressed-prediction.png
+│
 ├── .gitignore
 ├── README.md
 └── report.pdf
 ```
+
+---
+
+# 📸 Screenshots
+
+## 🏠 Home Page
+
+![Home Page](screenshots/home-page.png)
+
+---
+
+## 📉 Depression Prediction
+
+![Depression Prediction](screenshots/depression-prediction.png)
+
+---
+
+## 😊 Not Depressed Prediction
+
+![Not Depressed Prediction](screenshots/not-depressed-prediction.png)
 
 ---
 
@@ -85,36 +114,30 @@ python app.py
 
 ### Frontend Setup
 
-```bash
-cd Frontend
-
-npm install
-
-npm start
-```
+Open the `Frontend` folder and launch the application using a local web server (for example, VS Code Live Server) or your preferred static file server.
 
 ---
 
 # 🚀 Workflow
 
-1. User enters text.
-2. Frontend sends the text to the Flask API.
-3. DistilBERT analyzes the text.
-4. The model predicts **Depressed** or **Not Depressed**.
-5. SHAP identifies the most influential words.
-6. The prediction, confidence score, and explanation are displayed.
+1. User enters text into the web interface.
+2. The frontend sends the input to the Flask backend.
+3. DistilBERT processes the text.
+4. The model predicts whether the text indicates **Depressed** or **Not Depressed**.
+5. SHAP generates an explainability graph showing the most influential words.
+6. The prediction, confidence score, detected emotion, and SHAP visualization are displayed.
 
 ---
 
 # 📊 Output
 
-The system provides:
+The application provides:
 
 * Depression Prediction
+* Detected Emotion
 * Confidence Score
-* SHAP Explanation
-* Important Words
-* Visualization Graph
+* SHAP Explainability Graph
+* Important Influential Words
 
 ---
 
@@ -152,4 +175,4 @@ The system provides:
 
 # 📄 License
 
-This project is developed for academic and educational purposes.
+This project was developed for academic and educational purposes.
