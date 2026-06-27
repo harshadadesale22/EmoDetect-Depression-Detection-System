@@ -22,33 +22,28 @@ EmoDetect is a Natural Language Processing (NLP) based web application developed
 
 ---
 
-# 🛠️ Tech Stack
+## 🛠 Tech Stack
 
 ### Frontend
-
-* React.js
-* HTML5
-* CSS3
-* JavaScript
+- HTML5
+- CSS3
+- JavaScript
 
 ### Backend
-
-* Flask
-* Python
-* Flask-CORS
+- Python
+- Flask
+- Flask-CORS
 
 ### Machine Learning
-
-* DistilBERT
-* Hugging Face Transformers
-* SHAP
-* Scikit-learn
-* NumPy
-* Matplotlib
-
+- DistilBERT
+- Hugging Face Transformers
+- SHAP
+- NumPy
+- Scikit-learn
+- Matplotlib
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```text
 EmoDetect-Depression-Detection-System
@@ -56,17 +51,15 @@ EmoDetect-Depression-Detection-System
 ├── Backend
 │   ├── app.py
 │   ├── requirements.txt
-│   ├── static/
-│   └── ...
+│   └── static/
 │
 ├── Frontend
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── ...
+│   ├── index.html
+│   ├── script.js
+│   └── style.css
 │
-├── README.md
 ├── .gitignore
+├── README.md
 └── report.pdf
 ```
 
