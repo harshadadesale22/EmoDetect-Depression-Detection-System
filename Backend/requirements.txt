@@ -8,3 +8,5 @@ matplotlib==3.10.3
 scikit-learn==1.7.0
 safetensors==0.5.3
 tokenizers==0.21.1
+
+gunicorn
