@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EmoDetect — Emotion-Aware Depression Detection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Ambient background layers -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <span class="toggle-icon">☀</span>
+  </button>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-mark" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="13" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M7 14c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="14" cy="17" r="3" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <span class="logo-name">EmoDetect</span>
+      <span class="logo-tag">BERT + SHAP Explanability</span>
+    </div>
+    <div class="header-status">
+      <span class="status-dot" id="statusDot"></span>
+      <span class="status-label" id="statusLabel">Connecting…</span>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="main-content">
+
+    <!-- Hero section -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-chip">Emotion-Aware AI</span>
+      </div>
+      <h1 id="hero-title" class="hero-title">
+        Understand what<br/>
+        <em>your words reveal</em>
+      </h1>
+      <p class="hero-subtitle">
+        Type your thoughts below. EmoDetect uses BERT and SHAP to detect emotional patterns
+        and identify indicators of depression — with full explainability.
+      </p>
+    </section>
+
+    <!-- Input card -->
+    <section class="input-section" aria-label="Text input">
+      <div class="input-card">
+        <div class="input-header">
+          <label class="input-label" for="userInput">Your thoughts</label>
+          <span class="char-counter" id="charCounter">0 / 600</span>
+        </div>
+
+        <div class="textarea-wrapper">
+          <textarea
+            id="userInput"
+            class="thought-input"
+            placeholder="Share how you've been feeling lately… (Press Enter to analyze)"
+            maxlength="600"
+            rows="5"
+            autocomplete="off"
+            spellcheck="true"
+            aria-describedby="inputError"
+          ></textarea>
+          <div class="textarea-border-glow" aria-hidden="true"></div>
+        </div>
+
+        <!-- Inline error -->
+        <div class="error-message" id="inputError" role="alert" aria-live="polite"></div>
+
+        <!-- Actions -->
+        <div class="button-row">
+          <button class="btn btn-primary" id="analyzeBtn" type="button">
+            <span class="btn-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="btn-label">Analyze</span>
+            <span class="btn-shimmer" aria-hidden="true"></span>
+          </button>
+          <button class="btn btn-secondary" id="clearBtn" type="button">
+            <span class="btn-label">Clear</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading state -->
+    <section class="loading-section" id="loadingSection" aria-live="polite" aria-label="Analyzing" hidden>
+      <div class="loading-card">
+        <div class="spinner-ring" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="20" fill="none" stroke="var(--ring-track)" stroke-width="3"/>
+            <circle cx="24" cy="24" r="20" fill="none" stroke="var(--ring-active)" stroke-width="3"
+              stroke-linecap="round" stroke-dasharray="40 86" stroke-dashoffset="0"
+              class="spinner-arc"/>
+          </svg>
+        </div>
+        <p class="loading-label">Analyzing patterns…</p>
+        <p class="loading-sub">BERT is reading between the lines</p>
+      </div>
+    </section>
+
+    <!-- Results card -->
+    <section class="result-section" id="resultSection" aria-label="Analysis results" hidden>
+      <div class="result-card">
+
+        <!-- Result header -->
+        <div class="result-header">
+          <span class="result-badge" id="resultBadge"></span>
+          <button class="close-result" id="closeResult" aria-label="Close results">✕</button>
+        </div>
+
+        <!-- Primary metrics row -->
+        <div class="metrics-grid">
+
+          <!-- Prediction -->
+          <div class="metric-block">
+            <span class="metric-label">Prediction</span>
+            <span class="metric-value prediction-value" id="predictionValue"></span>
+          </div>
+
+          <!-- Emotion -->
+          <div class="metric-block">
+            <span class="metric-label">Detected Emotion</span>
+            <span class="emotion-badge" id="emotionBadge"></span>
+          </div>
+
+        </div>
+
+        <!-- Confidence bar -->
+        <div class="confidence-block">
+          <div class="confidence-header">
+            <span class="metric-label">Confidence</span>
+            <span class="confidence-pct" id="confidencePct">0%</span>
+          </div>
+          <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-glow" id="progressGlow" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- Important words -->
+        <div class="words-block" id="wordsBlock">
+          <span class="metric-label">Key Indicators</span>
+          <div class="words-chips" id="wordsChips"></div>
+        </div>
+
+        <!-- SHAP Graph -->
+        <div class="shap-block" id="shapBlock">
+          <span class="metric-label">SHAP Explainability Graph</span>
+          <div class="shap-image-wrapper">
+            <img class="shap-image" id="shapImage" src="" alt="SHAP explanation graph" loading="lazy" />
+            <div class="shap-overlay" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <p class="result-disclaimer">
+          ⚠ This tool is for research purposes only. Please consult a mental health professional for any concerns.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- Error card -->
+    <section class="error-section" id="errorSection" aria-live="assertive" hidden>
+      <div class="error-card">
+        <div class="error-icon" aria-hidden="true">⚡</div>
+        <p class="error-title">Connection Error</p>
+        <p class="error-body" id="errorBody">Could not reach the backend. Please ensure the Flask server is running at <code>localhost:5000</code>.</p>
+        <button class="btn btn-secondary" id="retryBtn" type="button">Try Again</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>EmoDetect · BERT + SHAP · For research use only</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
