@@ -15,10 +15,10 @@ app = Flask(__name__, static_folder="static")
 CORS(app)
 
 # ===== MODEL =====
-MODEL_PATH = "./bert_depression_model"
+MODEL_NAME = "harshadadesale22/bert-depression-model"
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH)
-model = AutoModelForSequenceClassification.from_pretrained(MODEL_PATH)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
 
 device = torch.device("cpu")
 model.to(device)
@@ -168,7 +168,7 @@ def predict_api():
 
         graph_url = None
         if graph_path:
-            graph_url = f"http://127.0.0.1:5000/{graph_path}"
+            graph_url = request.host_url.rstrip("/") + "/" + graph_path
 
         return jsonify({
             "prediction": label,
@@ -183,4 +183,5 @@ def predict_api():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
