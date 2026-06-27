@@ -192,7 +192,7 @@ async function runAnalysis() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: text.trim() }),
-      signal: AbortSignal.timeout(30000),
+      signal: AbortSignal.timeout(120000),
     });
 
     if (!response.ok) {
@@ -205,19 +205,21 @@ async function runAnalysis() {
     setStatus('online', 'API online');
 
   } catch (err) {
-    hideSection(loadingSection);
-    setStatus('offline', 'API offline');
+  hideSection(loadingSection);
 
-    if (err.name === 'TimeoutError') {
-      showNetworkError('Request timed out. The server took too long to respond. Please try again.');
-    } else if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
-      showNetworkError('Could not reach the backend. Please ensure the Flask server is running at <code>localhost:5000</code>.');
-    } else {
-      showNetworkError(`Error: ${err.message}`);
-    }
-  } finally {
-    setAnalyzeDisabled(false);
+  if (err.name === 'TimeoutError') {
+    setStatus('online', 'Processing...');
+    showNetworkError('Analysis is taking longer than expected because the SHAP explanation is being generated. Please try again in a few moments.');
+  } else if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+    setStatus('offline', 'API offline');
+    showNetworkError('Could not reach the backend. Please ensure the Flask server is running at <code>http://127.0.0.1:5000</code>.');
+  } else {
+    setStatus('offline', 'API error');
+    showNetworkError(`Error: ${err.message}`);
   }
+} finally {
+  setAnalyzeDisabled(false);
+}
 }
 
 /* ============================================================

@@ -148,6 +148,12 @@ def predict(text):
 
     return pred, conf
 
+@app.route("/")
+def home():
+    return jsonify({
+        "status": "API Running"
+    })
+
 # ===== API =====
 @app.route("/predict", methods=["POST"])
 def predict_api():
