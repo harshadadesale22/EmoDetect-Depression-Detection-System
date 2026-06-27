@@ -1,3 +1,5 @@
-Backend/bert_depression_model/
+node_modules/
+venv/
 __pycache__/
 *.pyc
+.env
