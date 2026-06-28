@@ -25,7 +25,7 @@ model.to(device)
 model.eval()
 
 # ===== SHAP =====
-masker = shap.maskers.Text(tokenizer)
+# masker = shap.maskers.Text(tokenizer)
 
 def shap_predict(texts):
     inputs = tokenizer(
@@ -47,7 +47,7 @@ def shap_predict(texts):
 
     return probs.cpu().numpy()
 
-explainer = shap.Explainer(shap_predict, masker)
+# explainer = shap.Explainer(shap_predict, masker)
 
 # ===== STATIC FOLDER =====
 if not os.path.exists("static"):
@@ -164,11 +164,12 @@ def predict_api():
         pred, conf = predict(text)
         label = "Depressed" if pred == 1 else "Not Depressed"
 
-        graph_path = generate_shap_graph(text)
+        # graph_path = generate_shap_graph(text)
 
         graph_url = None
-        if graph_path:
-            graph_url = request.host_url.rstrip("/") + "/" + graph_path
+
+        # if graph_path:
+            # graph_url = request.host_url.rstrip("/") + "/" + graph_path
 
         return jsonify({
             "prediction": label,
