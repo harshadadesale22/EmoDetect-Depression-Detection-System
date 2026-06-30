@@ -1,7 +1,7 @@
 # 🧠 EmoDetect: Depression Detection System
 
 ## 🚀 Live Demo
-👉 [Try EmoDetect Live](https://huggingface.co/spaces/harshadadesale22/EmoDetect)
+👉 [Try EmoDetect Live](https://harshadadesale22.github.io/EmoDetect-Depression-Detection-System/Frontend/index.html)
 
 An AI-powered **Natural Language Processing (NLP)** web application that detects signs of depression from user-entered text using **DistilBERT** and provides **SHAP (SHapley Additive Explanations)** visualizations for transparent and explainable predictions.
 
