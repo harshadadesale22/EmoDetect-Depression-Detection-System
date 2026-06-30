@@ -37,8 +37,8 @@ const shapImage       = document.getElementById('shapImage');
 const shapBlock       = document.getElementById('shapBlock');
 const errorBody       = document.getElementById('errorBody');
 
-const BACKEND_URL     = 'http://127.0.0.1:5000/predict';
-const HEALTH_URL      = 'http://127.0.0.1:5000/';
+const BACKEND_URL     = '/predict';
+const HEALTH_URL      = '/';
 const MAX_CHARS       = 600;
 
 /* ============================================================
