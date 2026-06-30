@@ -37,8 +37,8 @@ const shapImage       = document.getElementById('shapImage');
 const shapBlock       = document.getElementById('shapBlock');
 const errorBody       = document.getElementById('errorBody');
 
-const BACKEND_URL     = '/predict';
-const HEALTH_URL      = '/';
+const BACKEND_URL     = 'https://harshadadesale22-emodetect.hf.space/predict';
+const HEALTH_URL      = 'https://harshadadesale22-emodetect.hf.space/';
 const MAX_CHARS       = 600;
 
 /* ============================================================
